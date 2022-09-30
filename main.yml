@@ -1,6 +1,6 @@
 ---
 - name: TIMESCALEDB | Install
-  import_tasks: install.yml
+  import_playbook: install.yml
   tags:
     - timescaledb_install
 
