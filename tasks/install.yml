@@ -8,3 +8,4 @@
       disable_gpg_check: true
       enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
       state: present
+  tags: timescaledb_install
