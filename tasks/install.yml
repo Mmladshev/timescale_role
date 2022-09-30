@@ -1,0 +1,7 @@
+---
+- name: TIMESCALEDB | Be sure timescaledb packages are installed
+  yum:
+    disable_gpg_check: true
+    enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
+    name: "{{ timescaledb_name }}"
+    state: present

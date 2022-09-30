@@ -1,11 +1,4 @@
 ---
-- name: TIMESCALEDB | Install
-  dnf:
-    disable_gpg_check: true
-    enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
-    name:  "{{ timescaledb_name }}"
-    state: present
-
 - name: TIMESCALEDB | Autotune
   block:
   - name: TIMESCALEDB | Prepare timescaledb-tune
