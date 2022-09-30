@@ -1,9 +1,9 @@
 ---
 - name: TIMESCALEDB | Be sure timescaledb packages are installed
   block:
-    - name: Install TIMESCALEDB
-      yum:
-        disable_gpg_check: true
-        enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
-        name: "{{ timescaledb_name }}"
-        state: present
+  - name: Install TIMESCALEDB
+    yum:
+      disable_gpg_check: true
+      enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
+      name: "{{ timescaledb_name }}"
+      state: present
