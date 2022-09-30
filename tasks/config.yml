@@ -1,30 +1,32 @@
 ---
 - name: TIMESCALEDB | Autotune
   hosts: all
-  block:
-  - name: TIMESCALEDB | Prepare timescaledb-tune
-    shell: "md5sum /etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf | awk '{ print $1 }'"
-    register: pg_config_checksum
-    changed_when: false
+  tasks:
+  - name: Autotune
+    block:
+    - name: TIMESCALEDB | Prepare timescaledb-tune
+      shell: "md5sum /etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf | awk '{ print $1 }'"
+      register: pg_config_checksum
+      changed_when: false
 
-  - name: TIMESCALEDB | Run timescaledb-tune
-    command: "timescaledb-tune --quiet --yes"
-    changed_when: false
+    - name: TIMESCALEDB | Run timescaledb-tune
+      command: "timescaledb-tune --quiet --yes"
+      changed_when: false
 
-  - name: TIMESCALEDB | Remove tune fingerprint # This is in order to verify idempotency
-    lineinfile:
-      path: "/etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf"
-      regexp: '#?timescaledb.last_tuned*'
-      state: absent
-    changed_when: false
+    - name: TIMESCALEDB | Remove tune fingerprint # This is in order to verify idempotency
+      lineinfile:
+        path: "/etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf"
+        regexp: '#?timescaledb.last_tuned*'
+        state: absent
+      changed_when: false
 
-  - name: TIMESCALEDB | Verify timescaledb-tune
-    shell: "md5sum /etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf | awk '{ print $1 }'"
-    register: autotune_pg_config_checksum
-    changed_when: pg_config_checksum.stdout != autotune_pg_config_checksum.stdout
-    notify:
-      - timescaledb pg restart
-  when: Autotune|int == 1
+    - name: TIMESCALEDB | Verify timescaledb-tune
+      shell: "md5sum /etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf | awk '{ print $1 }'"
+      register: autotune_pg_config_checksum
+      changed_when: pg_config_checksum.stdout != autotune_pg_config_checksum.stdout
+      notify:
+        - timescaledb pg restart
+    when: Autotune|int == 1
 
 - name: TIMESCALEDB | Flush handlers
   meta: flush_handlers
