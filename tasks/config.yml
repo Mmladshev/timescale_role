@@ -1,11 +1,12 @@
 ---
 - name: TIMESCALEDB | Install
-  yum:
-    disable_gpg_check: true
-    enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
-    name:  "{{ timescaledb_name }}"
-    state: present
-
+  block:
+    - name: install TIMESCALEDB
+      yum:
+        disable_gpg_check: true
+        enablerepo: "TCCENTER_PostgreSQL_TimescaleDB-el8"
+        name:  "{{ timescaledb_name }}"
+        state: present
 
 - name: TIMESCALEDB | Autotune
   block:
