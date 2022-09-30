@@ -1,5 +1,6 @@
 ---
 - name: TIMESCALEDB | Autotune
+  hosts: all
   block:
   - name: TIMESCALEDB | Prepare timescaledb-tune
     shell: "md5sum /etc/postgresql/{{ timescaledb_pg_major }}/main/postgresql.conf | awk '{ print $1 }'"
