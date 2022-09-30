@@ -4,15 +4,15 @@
   tags:
     - timescaledb_install
 
-- name: TIMESCALEDB | Configure
-  import_playbook: tasks/config.yml
-  tags:
-    - timescaledb_configure
+# - name: TIMESCALEDB | Configure
+#   import_playbook: tasks/config.yml
+#   tags:
+#     - timescaledb_configure
 
-- name: TIMESCALEDB | Flush handlers
-  meta: flush_handlers
+# - name: TIMESCALEDB | Flush handlers
+#   meta: flush_handlers
 
-- name: TIMESCALEDB | Setup timescaledb
-  import_playbook: tasks/config_timescaledb.yml
-  tags:
-    - timescaledb_setup
+# - name: TIMESCALEDB | Setup timescaledb
+#   import_playbook: tasks/config_timescaledb.yml
+#   tags:
+#     - timescaledb_setup
