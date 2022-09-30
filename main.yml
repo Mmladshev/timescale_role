@@ -1,6 +1,6 @@
 ---
 - name: TIMESCALEDB | Configure
-  import_tasks: tasks/config.yml
+  import_playbook: tasks/config.yml
   tags:
     - timescaledb_configure
 
@@ -8,6 +8,6 @@
   meta: flush_handlers
 
 - name: TIMESCALEDB | Setup timescaledb
-  import_tasks: tasks/config_timescaledb.yml
+  import_playbook: tasks/config_timescaledb.yml
   tags:
     - timescaledb_setup
