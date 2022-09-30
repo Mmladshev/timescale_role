@@ -27,6 +27,3 @@
       notify:
         - timescaledb pg restart
     when: Autotune|int == 1
-
-- name: TIMESCALEDB | Flush handlers
-  meta: flush_handlers
